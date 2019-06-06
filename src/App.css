@@ -3,6 +3,16 @@
   background-color: #708D81;
   color: white;
 }
+
+
+
+.App{
+	display: inline-block;
+    margin-left: 10px;
+    color: #999999;
+    min-width: 110px;
+}
+
 .container{
 	text-align: center;
 	background-color: #708D81;
