@@ -6,22 +6,34 @@ class App extends React.Component {
 	
   constructor(props) {
     super(props);
+    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
 			isLoading: true,
-		    selected: null,
+		    selected: [],
+		    selectedTool: [],
+		    selectedLang: [],
 		    PIMS:'',
+		    data:[],
+		    dataL:[],
+		    dataT:[],
 	    	  name:'',
 	    	  teamName:'',
 	    	  email:'',
 	    	  CUID:'',
 	    	  skill:[],
-	    	  id:'',
+	    	  tools:[],
+	    	  Languages:[],
+	    	  id:'',  
 	    	  seq:0,
 	    	  	    	  
 		  };
    
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeTool = this.handleChangeTool.bind(this);
+    this.handleSelectTool=this.handleSelectTool.bind(this);
+    this.handleChangeLang = this.handleChangeLang.bind(this);
+    this.handleSelectLang=this.handleSelectLang.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelect=this.handleSelect.bind(this);
   }
@@ -34,13 +46,13 @@ class App extends React.Component {
 	      </div>
 	    )
 	  }
-  
+
+
   handleSelect=(selectedOption)=>{
       console.log(`Option selected on creation is:`, selectedOption);
       let select=this.state.selected;
-    
-      
-	    
+      this.handleSelect=this.handleSelect.bind(this);
+
 	  fetch('http://localhost:8087/api/skills/', {
 	      method: 'POST',
 	      headers:{
@@ -66,15 +78,192 @@ class App extends React.Component {
 	    select.push({value:json.id,label:json.skill});
 	    this.setState({selected:select}); 
 	    this.setState({data:select}); 
-	    console.log();
+	    console.log(selectedOption);
 	    }
 	    )
 	    .catch(err => console.log(err));
+	  
+	  fetch(`http://localhost:8087/api/skills/`,{ method: 'GET',
+	      headers:{
+	    	  
+	    	  "Acess-Contol-Allow-Origin":"*",
+	    	  "Accept":"application/json",
+	    	  "Access-Control-Allow-Methods":"*",
+	    	  "Access-Control-Allow-Headers":"*",
+	      },      
+	      mode:'cors',
+
+	      })
+	      
+	    .then(response => response.json())
+	      .then(json => {
+	          
+	          var options = [];
+	          for(var i=0;i<json.length;i++){
+	        	  console.log(json[i]);
+	        	  options.push({value:json[i].id,label:json[i].skill});
+	        	
+		          console.log(options);
+	        	  
+	         }
+	          this.setState({data:options})
+	          this.handleSelect=this.handleSelect.bind(this);
+	  	      this.handleChange = this.handleChange.bind(this);
+
+	    	  
+	      });
+	    
 
 	  console.log("printing state");
 	  console.log(this.state);
 	 console.log(selectedOption);
+	 
+	 this.handleChange = this.handleChange.bind(this);
 	  
+  }
+  
+  handleSelectTool=(selectedOption)=>{
+      console.log(`Option selected on creation is:`, selectedOption);
+      let select=this.state.selectedTool;
+      
+
+
+	  fetch('http://localhost:8087/api/tools/', {
+	      method: 'POST',
+	      headers:{
+	    	  
+	    	  "Content-Type":"application/json",
+	    	  "Acess-Contol-Allow-Origin":"*",
+	    	  "Accept":"application/json",
+	    	  "Access-Control-Allow-Methods":"*",
+	    	  "Access-Control-Allow-Headers":"*",
+	      },      
+	      mode:'cors', 
+	      
+	      body:JSON.stringify({
+	    	  id:Math.random()*1000,
+	    	  tool:selectedOption, 
+	      })
+	    })
+	    .then(response => response.json())
+	    .then(json => {
+	    
+	    console.log(json)
+
+	    select.push({value:json.id,label:json.tool});
+	    this.setState({selectedTool:select}); 
+	    this.setState({dataT:select}); 
+	    }
+	    )
+	    .catch(err => console.log(err));
+	  
+	  fetch(`http://localhost:8087/api/tools/`,{ method: 'GET',
+	      headers:{
+	    	  
+	    	  "Acess-Contol-Allow-Origin":"*",
+	    	  "Accept":"application/json",
+	    	  "Access-Control-Allow-Methods":"*",
+	    	  "Access-Control-Allow-Headers":"*",
+	      },      
+	      mode:'cors',
+
+	      })
+	      
+	    .then(response => response.json())
+	      .then(json => {
+	          
+	          var options = [];
+	          for(var i=0;i<json.length;i++){
+	        	  console.log(json[i]);
+	        	  options.push({value:json[i].id,label:json[i].tool});
+	        	
+		          console.log(options);
+	        	  
+	         }
+	          this.setState({dataT:options})
+	          this.handleSelectTool=this.handleSelectTool.bind(this);
+	  	      this.handleChangeTool = this.handleChangeTool.bind(this);
+
+	    	  
+	      });
+
+	  console.log("printing state");
+	  console.log(this.state);
+	 console.log(selectedOption);
+	this.handleChangeTool = this.handleChangeTool.bind(this);
+	this.handleSelectTool=this.handleSelectTool.bind(this);
+	  
+  }
+  
+  handleSelectLang=(selectedOption)=>{
+      console.log(`Option selected on creation is:`, selectedOption);
+      let select=this.state.selectedLang;
+      this.handleSelectLang=this.handleSelectLang.bind(this);
+
+
+	  fetch('http://localhost:8087/api/languages/', {
+	      method: 'POST',
+	      headers:{
+	    	  
+	    	  "Content-Type":"application/json",
+	    	  "Acess-Contol-Allow-Origin":"*",
+	    	  "Accept":"application/json",
+	    	  "Access-Control-Allow-Methods":"*",
+	    	  "Access-Control-Allow-Headers":"*",
+	      },      
+	      mode:'cors', 
+	      
+	      body:JSON.stringify({
+	    	  id:Math.random()*1000,
+	    	  language:selectedOption, 
+	      })
+	    })
+	    .then(response => response.json())
+	    .then(json => {
+	    
+	    console.log(json)
+
+	    select.push({value:json.id,label:json.language});
+	    this.setState({selectedLang:select}); 
+	    this.setState({dataL:select}); 
+	    console.log();
+	    }
+	    )
+	    .catch(err => console.log(err));
+	  
+	  fetch(`http://localhost:8087/api/languages/`,{ method: 'GET',
+	      headers:{
+	    	  
+	    	  "Acess-Contol-Allow-Origin":"*",
+	    	  "Accept":"application/json",
+	    	  "Access-Control-Allow-Methods":"*",
+	    	  "Access-Control-Allow-Headers":"*",
+	      },      
+	      mode:'cors',
+
+	      })
+	      
+	    .then(response => response.json())
+	      .then(json => {
+	          
+	          var options = [];
+	          for(var i=0;i<json.length;i++){
+	        	  console.log(json[i]);
+	        	  options.push({value:json[i].id,label:json[i].language});
+	        	
+		          console.log(options);
+	        	  
+	         }
+	          this.setState({dataL:options})
+	          this.handleSelectLang=this.handleSelectLang.bind(this);
+	  	      this.handleChangeLang = this.handleChangeLang.bind(this);
+  
+	      });
+
+	  console.log("printing state");
+	  console.log(this.state);
+	 console.log(selectedOption);
+	 this.handleChangeLang = this.handleChangeLang.bind(this);	  
   }
   
   componentDidMount() {
@@ -107,6 +296,66 @@ class App extends React.Component {
 
 	    	  
 	      });
+	    
+	    fetch(`http://localhost:8087/api/tools/`,{ method: 'GET',
+		      headers:{
+		    	  
+		    	  "Acess-Contol-Allow-Origin":"*",
+		    	  "Accept":"application/json",
+		    	  "Access-Control-Allow-Methods":"*",
+		    	  "Access-Control-Allow-Headers":"*",
+		      },      
+		      mode:'cors',
+
+		      })
+		      
+		    .then(response => response.json())
+		      .then(json => {
+		          
+		          var options = [];
+		          for(var i=0;i<json.length;i++){
+		        	  console.log(json[i]);
+		        	  options.push({value:json[i].id,label:json[i].tool});
+		        	
+			          console.log(options);
+		        	  
+		         }
+		          this.setState({dataT:options})
+		          this.handleSelectTool=this.handleSelectTool.bind(this);
+		  	      this.handleChangeTool = this.handleChangeTool.bind(this);
+
+		    	  
+		      });
+	    
+	    fetch(`http://localhost:8087/api/languages/`,{ method: 'GET',
+		      headers:{
+		    	  
+		    	  "Acess-Contol-Allow-Origin":"*",
+		    	  "Accept":"application/json",
+		    	  "Access-Control-Allow-Methods":"*",
+		    	  "Access-Control-Allow-Headers":"*",
+		      },      
+		      mode:'cors',
+
+		      })
+		      
+		    .then(response => response.json())
+		      .then(json => {
+		          
+		          var options = [];
+		          for(var i=0;i<json.length;i++){
+		        	  console.log(json[i]);
+		        	  options.push({value:json[i].id,label:json[i].language});
+		        	
+			          console.log(options);
+		        	  
+		         }
+		          this.setState({dataL:options})
+		          this.handleSelectLang=this.handleSelectLang.bind(this);
+		  	      this.handleChangeLang = this.handleChangeLang.bind(this);
+
+		    	  
+		      });
 	           	  }
 
   handleChange = (selectedOption) => {
@@ -117,30 +366,77 @@ class App extends React.Component {
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
 	  }
+  
+  handleChangeTool = (selectedOption) => {
+	    this.setState({selectedTool:selectedOption});  
+	    console.log(`Option selected:`, selectedOption);
+      this.handleSelectTool=this.handleSelectTool.bind(this);
 
+	    this.handleChangeTool = this.handleChangeTool.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);
+	  }
+
+  handleChangeLang = (selectedOption) => {
+	    this.setState({selectedLang:selectedOption});  
+	    console.log(`Option selected:`, selectedOption);
+    this.handleSelectLang=this.handleSelectLang.bind(this);
+
+	    this.handleChangeLang = this.handleChangeLang.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);
+	  }
+
+  
   handleSubmit(event) {
 	this.handleChange = this.handleChange.bind(this);
 	this.handleSelect = this.handleSelect.bind(this);
+	this.handleSelectTool=this.handleSelectTool.bind(this);
+    this.handleChangeTool = this.handleChangeTool.bind(this);
+    this.handleSelectLang=this.handleSelectLang.bind(this);
+    this.handleChangeLang = this.handleChangeLang.bind(this);
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
 
 	  var select=this.state.selected;
+	  var selectTool=this.state.selectedTool;
+	  var selectLang=this.state.selectedLang;
+	  
 	  console.log("selected value");
 	  console.log(select);
-	  let label;
+	  console.log(selectTool);
+	  let label; let labelTool; let labelLang;
+	  
 	  for(let i=0; i<select.length; i++){
-		  if(i==0){
+		  if(i===0){
 			  label = select[i]['label'];
 		  }else{
 			  label = label + ", "+select[i]['label'];
 		  }
 	  }
+	  
+	  for(let i=0; i<selectTool.length; i++){
+		  if(i===0){
+			  labelTool = selectTool[i]['label'];
+		  }else{
+			  labelTool = labelTool + ", "+selectTool[i]['label'];
+		  }
+	  }
+	  for(let i=0; i<selectLang.length; i++){
+		  if(i===0){
+			  labelLang = selectLang[i]['label'];
+		  }else{
+			  labelLang = labelLang + ", "+selectLang[i]['label'];
+		  }
+	  }
 	    console.log(label);
 	    var labelTemp = label;
-	    let value = event.target.value;
+	    var labelT=labelTool;
+	    var labelL=labelLang;
 	
 	  console.log(labelTemp);
+	  console.log(labelT);
+	  console.log(labelT);
+
       fetch('http://localhost:8087/api/users/', {
       method: 'POST',
       headers:{
@@ -160,20 +456,21 @@ class App extends React.Component {
     	  email:event.target[3].value,
     	  CUID:event.target[4].value,
     	  skill: labelTemp,
+    	  tools: labelT,
+    	  Languages: labelL,
       })
     })
     
     .then(response => console.log(response))
     .catch(err => console.log(err));
-	console.log(data);
-	console.log(labelTemp);
-	
-console.log(label.split(","));
-	
+	console.log(data);	
   }
  
   render() {
 	const { selected } = this.state;
+	const { selectedTool } = this.state;
+	const { selectedLang } = this.state;
+	
     return (
     		<div>
     		<center>
@@ -208,7 +505,7 @@ console.log(label.split(","));
     	  placeholder="Team Name"
       type="text"
       data-parse="uppercase"
-    	  required  	 
+    	    	 
     /><br /><br />
     
         <input ref="email" type="email"
@@ -242,10 +539,52 @@ console.log(label.split(","));
         clearRenderer={() => null}
         allowCreate={true}
         inputRenderer={this.renderInput} 
+        openMenuOnFocus={ true }
+        placeholder="Select Skill/Methodologies"
+        	
+      /> <br />
+        <br />     
+
+        <Creatable
+        name="tool"
+        id="tool"
+        ref="tool"      
+        isMulti={true}
+        value={selectedTool}
+        onChange={this.handleChangeTool}
+        onCreateOption={this.handleSelectTool}
+        options={this.state.dataT}
+        onSelectResetsInput={false}
+        onBlurResetsInput={false}
+        onCloseResetsInput={false}
+        arrowRenderer={() => null}
+        clearRenderer={() => null}
+        allowCreate={true}
+        inputRenderer={this.renderInput} 
+        placeholder="Select Your Tool"
+        	
+      /> <br />
+        <br />     
         
-        
-        
-        placeholder="Select Your skill"
+        <Creatable
+        name="lang"
+        id="lang"
+        ref="lang"
+        isMulti={true}
+        value={selectedLang}
+        onChange={this.handleChangeLang}
+        onCreateOption={this.handleSelectLang}
+        options={this.state.dataL}
+        onSelectResetsInput={false}
+        onBlurResetsInput={false}
+        openOnFocus={true}
+        onCloseResetsInput={false}
+        arrowRenderer={() => null}
+        clearRenderer={() => null}
+        allowCreate={true}
+        inputRenderer={this.renderInput} 
+        required
+        placeholder="Select Your Language"
       /> <br />
         <br />     
 
