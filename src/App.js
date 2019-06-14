@@ -53,7 +53,7 @@ class App extends React.Component {
       let select=this.state.selected;
       this.handleSelect=this.handleSelect.bind(this);
 
-	  fetch('http://localhost:8087/api/skills/', {
+	  fetch('http://10.171.45.137:8087/api/skills/', {
 	      method: 'POST',
 	      headers:{
 	    	  
@@ -83,7 +83,7 @@ class App extends React.Component {
 	    )
 	    .catch(err => console.log(err));
 	  
-	  fetch(`http://localhost:8087/api/skills/`,{ method: 'GET',
+	  fetch(`http://10.171.45.137:8087/api/skills/`,{ method: 'GET',
 	      headers:{
 	    	  
 	    	  "Acess-Contol-Allow-Origin":"*",
@@ -128,7 +128,7 @@ class App extends React.Component {
       
 
 
-	  fetch('http://localhost:8087/api/tools/', {
+	  fetch('http://10.171.45.137:8087/api/tools/', {
 	      method: 'POST',
 	      headers:{
 	    	  
@@ -157,7 +157,7 @@ class App extends React.Component {
 	    )
 	    .catch(err => console.log(err));
 	  
-	  fetch(`http://localhost:8087/api/tools/`,{ method: 'GET',
+	  fetch(`http://10.171.45.137:8087/api/tools/`,{ method: 'GET',
 	      headers:{
 	    	  
 	    	  "Acess-Contol-Allow-Origin":"*",
@@ -201,7 +201,7 @@ class App extends React.Component {
       this.handleSelectLang=this.handleSelectLang.bind(this);
 
 
-	  fetch('http://localhost:8087/api/languages/', {
+	  fetch('http://10.171.45.137:8087/api/languages/', {
 	      method: 'POST',
 	      headers:{
 	    	  
@@ -231,7 +231,7 @@ class App extends React.Component {
 	    )
 	    .catch(err => console.log(err));
 	  
-	  fetch(`http://localhost:8087/api/languages/`,{ method: 'GET',
+	  fetch(`http://10.171.45.137:8087/api/languages/`,{ method: 'GET',
 	      headers:{
 	    	  
 	    	  "Acess-Contol-Allow-Origin":"*",
@@ -267,7 +267,7 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-	    fetch(`http://localhost:8087/api/skills/`,{ method: 'GET',
+	    fetch(`http://10.171.45.137:8087/api/skills/`,{ method: 'GET',
 	      headers:{
 	    	  
 	    	  "Acess-Contol-Allow-Origin":"*",
@@ -297,7 +297,7 @@ class App extends React.Component {
 	    	  
 	      });
 	    
-	    fetch(`http://localhost:8087/api/tools/`,{ method: 'GET',
+	    fetch(`http://10.171.45.137:8087/api/tools/`,{ method: 'GET',
 		      headers:{
 		    	  
 		    	  "Acess-Contol-Allow-Origin":"*",
@@ -327,7 +327,7 @@ class App extends React.Component {
 		    	  
 		      });
 	    
-	    fetch(`http://localhost:8087/api/languages/`,{ method: 'GET',
+	    fetch(`http://10.171.45.137:8087/api/languages/`,{ method: 'GET',
 		      headers:{
 		    	  
 		    	  "Acess-Contol-Allow-Origin":"*",
@@ -437,7 +437,7 @@ class App extends React.Component {
 	  console.log(labelT);
 	  console.log(labelT);
 
-      fetch('http://localhost:8087/api/users/', {
+      fetch('http://10.171.45.137:8087/api/users/', {
       method: 'POST',
       headers:{
     	  
