@@ -1,4 +1,6 @@
 import React from 'react';
+import App from './App';
+import routes from './routes';
 
 import Creatable from 'react-select/creatable';
 
@@ -25,7 +27,7 @@ class MainPage extends React.Component {
 	    	  tools:[],
 	    	  Languages:[],
 	    	  id:'',  
-	    	  seq:0,
+	    	  
 	    	  	    	  
 		  };
    
@@ -474,7 +476,7 @@ class MainPage extends React.Component {
     return (
     		<div>
     		<center>
-     <h1 className="head1"> WELCOME </h1>
+     
      <h2 className="head2"> Kindly fill your details. </h2>
       <form name="form" onSubmit={this.handleSubmit}> 
       <br />
@@ -509,8 +511,9 @@ class MainPage extends React.Component {
     /><br /><br />
     
         <input ref="email" type="email"
-        	name="name" id="name"
-        		placeholder="E-mail"
+        	    name="name" id="name" value={this.email}
+				placeholder="E-mail"
+				pattern="^[a-zA-Z0-9_.-]+@(orange)\.com$"
         	/>
         	<br /><br />
         

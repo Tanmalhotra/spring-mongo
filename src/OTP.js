@@ -2,7 +2,9 @@ import React from 'react';
 import { Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import App from './App';
+import routes from './routes';
 import './OTP.css';
+
 import {
 	Link
 	} from 'react-router-dom'
@@ -21,10 +23,6 @@ class OTP extends React.Component{
 			
 			  </center>
 			
-			<div> <Switch> <Route  path="/" component={App}>
-   
-   <Route path="/MainPage" component={MainPage} /></Route></Switch>
-   </div>
 			</div>
 			);
 			}
