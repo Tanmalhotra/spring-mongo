@@ -1,6 +1,5 @@
 import React from 'react';
 import App from './App';
-import routes from './routes';
 
 import Creatable from 'react-select/creatable';
 
@@ -485,26 +484,26 @@ class MainPage extends React.Component {
       id="PIMS"
       name="PIMS"
       type="text"
-    	  placeholder="PIMS"
+      placeholder="PIMS"
       data-parse="uppercase"
       required          
     /><br /><br />
     
         <input
         id="name"
-        	name="name"
-          ref="name"
-          type="text"
-        	  placeholder="Name"
-          data-parse="uppercase"
-         value={this.handleInputChange}
+        name="name"
+        ref="name"
+        type="text"
+        placeholder="Name"
+        data-parse="uppercase"
+        value={this.handleInputChange}
         /><br /><br />
           
       <input
       id="teamName"
-    	  name="teamName"
+      name="teamName"
       ref="teamName"
-    	  placeholder="Team Name"
+      placeholder="Team Name"
       type="text"
       data-parse="uppercase"
     	    	 
@@ -517,11 +516,9 @@ class MainPage extends React.Component {
         	/>
         	<br /><br />
         
-        <input
-          ref="CUID"
-        	  name="name" id="name"
+        <input ref="CUID" name="name" id="name"
           type="text"
-        	  placeholder="CUID"
+          placeholder="CUID"
           data-parse="number"
         /><br /><br /><br />
                

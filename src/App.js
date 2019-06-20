@@ -1,12 +1,10 @@
 import React from 'react';
-import {Link, Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
+import {Link, Route, IndexRoute, Router, Switch } from 'react-router-dom';
 import OTP from './OTP';
 import MainPage from './MainPage';
 import start from './start';
-
-import {
-	
-	} from 'react-router-dom'
+import history from './history';
+import { withRouter } from 'react-router-dom';
 
 class App extends React.Component{
 
@@ -14,15 +12,17 @@ class App extends React.Component{
 	  return(
      <div className='App'>
 
+		 
+<Router history={history}>
 		<Switch> 
 			<Route exact path='/' component={start} />
 			<Route path="/OTP" component={OTP} />
             <Route path="/MainPage" component={MainPage} />
 		</Switch>
-
+		</Router>
      </div>
 			);
 		  }
 			
 		};
-export default App;
+export default withRouter(App);

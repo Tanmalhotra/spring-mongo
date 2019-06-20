@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import routes from './routes'
+
 import { Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import OTP from './OTP';

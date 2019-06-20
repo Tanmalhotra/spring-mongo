@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import App from './App';
-import routes from './routes';
+
 import './OTP.css';
+import { withRouter } from 'react-router-dom';
 
 import {
 	Link
@@ -28,4 +29,4 @@ class OTP extends React.Component{
 			}
 			
 		};
-export default OTP;
+export default withRouter(OTP);
